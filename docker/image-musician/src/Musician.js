@@ -13,8 +13,12 @@
 
 */
 
+const {v4: uuidv4} = require('uuid');
+
 var protocol = require('./sensor-protocol');
 
+
+var uuid = uuidv4();
 /*
  * We use a standard Node.js module to work with UDP
  */
@@ -55,7 +59,7 @@ function Musician(instrument){
 		}
 
 		var sound = {
-			//timestamp: Date.now(),
+			uuid: uuid,
 			sound: this.sound
 		};
 
