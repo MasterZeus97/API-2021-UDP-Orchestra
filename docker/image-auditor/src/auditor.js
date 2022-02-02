@@ -51,7 +51,6 @@ var inactiveInstr = function(uuid){
 
 var server = net.createServer(function(socket) {
 	socket.write(JSON.stringify(activeMusicians) + '\r\n');
-	socket.pipe(socket);
 });
 
-server.listen(PORT_TCP, '127.0.0.1');
+server.listen(PORT_TCP);
