@@ -159,7 +159,7 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #        | Topic                                                        |
 | -------- | ------------------------------------------------------------ |
 | Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
-|          | _Grâce au même package que celui utilisé dans les musiciens, à savoir dgram. Cependant, ici, on va se bind à un port et "s'abboner" à un adresse IP grâce à la méthode addMembership d'un socket et l'écouter en permanence._ |
+|          | _Grâce au même package que celui utilisé dans les musiciens, à savoir dgram. Cependant, ici, on va se bind à un port et "s'abonner" à un adresse IP grâce à la méthode addMembership d'un socket et l'écouter en permanence._ |
 | Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? |
 |          | _L'objet `Map` représente déjà un dictionnaire, autrement dit une carte de clés/valeurs. N'importe quelle valeur valable en JavaScript (que ce soit les objets ou les valeurs de types primitifs) peut être utilisée comme clé ou comme valeur. Une fois les données entrées dans le dictionnaire, on peut récupérer la valeur grâce à la méthode get(id)._ |
 | Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting? |
