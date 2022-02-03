@@ -163,18 +163,18 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? |
 |          | _L'objet `Map` représente déjà un dictionnaire, autrement dit une carte de clés/valeurs. N'importe quelle valeur valable en JavaScript (que ce soit les objets ou les valeurs de types primitifs) peut être utilisée comme clé ou comme valeur. Une fois les données entrées dans le dictionnaire, on peut récupérer la valeur grâce à la méthode get(id)._ |
 | Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting? |
-|          | _Enter your response here..._                                |
+|          | Le module contient la fonction "moment()" qui nous retourne la date actuelle (si appelée sans paramètres). Elle contient en plus de cela une fonction "format()" qui permet le formater la date envoyée par "moment()". Elle contient plein d'options de formatages différents disponible sur la documentation officielle du module. |
 | Question | When and how do we **get rid of inactive players**?          |
 |          | _On supprime les musicien quand ils sont déclarés inactifs. Un musicien est déclaré inactifs quand aucun son n'a été reçu de sa part depuis plus de 5 secondes. Pour déterminer si un musicien est actif ou non, nous stockons un objet setTimeout de 5 seconde dans un tableau à chaque fois qu'on reçois un son d'un musicien. Si le musicien a déjà un objet setTimeout existant dans le tableau, on le supprime avant d'en recréer un nouveau. De cette manière, si les 5 seconde d'attente du setTimeout arrivent au bout, une méthode supprimant le musicien représenté par le setTimeout dans le tableau des musiciens actifs, ainsi que son setTimeout dans le tableau des setTimeout._ |
 | Question | How do I implement a **simple TCP server** in Node.js?       |
-|          | _Enter your response here..._                                |
+|          | En utilisant le module "net". Il permet de créer un serveur acceptant les requêtes TCP |
 
 ## Task 5: package the "auditor" app in a Docker image
 
-| #        | Topic                                                                                |
-| -------- | ------------------------------------------------------------------------------------ |
+| #        | Topic                                                        |
+| -------- | ------------------------------------------------------------ |
 | Question | How do we validate that the whole system works, once we have built our Docker image? |
-|          | _Enter your response here..._                                                        |
+|          | Il faut simplement lancer le script "validate.sh" qui se trouve à la racine du labo. Une fois lancée, le script va recréer et lancer différents containers via les images que l'on a créé. Il va ensuite, via le protocole TCP, communiquer avec l'auditeur afin de récupérer les musiciens actifs et ainsi vérifier le bon fonctionnement des deux images. Il fera plusieurs tests en supprimant quelques musiciens et vérifiant qu'ils ne soient plus actifs au bout de 5 secondes. |
 
 ## Constraints
 
