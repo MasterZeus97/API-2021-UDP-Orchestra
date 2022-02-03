@@ -1,5 +1,5 @@
 const dgram = require('dgram');
-const uuid = require('uuid');
+const {v4 :uuidv4} = require('uuid');
 
 const PORT = 1234;
 const MULTICAST_ADDRESS = '239.255.22.5';
@@ -8,14 +8,14 @@ const socket = dgram.createSocket('udp4');
 
 var arguments = process.argv[2];
 var payload = {
-    uuid: uuid.v1(),
+    uuid: uuidv4(),
     sound: "vide"
 };
 
 var play = function() {
-    const message = new Buffer(JSON.stringify(payload));
+    message = new Buffer.from(JSON.stringify(payload));
     socket.send(message, 0, message.length, PORT, MULTICAST_ADDRESS,
-    function(err, bytes) {
+    function() {
         console.log("Sending payload: " + message + " via port " + socket.address().port);
     });
 }
@@ -39,7 +39,6 @@ switch(arguments){
     default:
         console.log("Instrument non-existant");
         return;
-        break;
 }
 
 setInterval(play, 1000);

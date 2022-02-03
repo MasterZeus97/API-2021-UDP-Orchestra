@@ -31,9 +31,31 @@ socket.on('message', function(msg, source) {
         exists = false;
     }
     else{
+        var instrument;
+        switch(object.sound){
+            case "ti-ta-ti":
+                instrument = "piano";
+                break;
+            case "pouet":
+                instrument = "trumpet";
+                break;
+            case "trulu":
+                instrument = "flute";
+                break;
+            case "gzi-gzi":
+                instrument = "violin";
+                break;
+            case "boum-boum":
+                instrument = "drum";
+                break;
+            default:
+                console.log("Instrument non-existant");
+                return;
+        }
+
         activeMusicians.push({
             uuid: object.uuid,
-            instrument: object.sound,
+            instrument: instrument,
             activeSince: (new Date()).toJSON()
         });
         timeouts.push(setTimeout(inactiveInstr, 5000, object.uuid.toString()))
@@ -49,8 +71,9 @@ var inactiveInstr = function(uuid){
     };
 }
 
-var server = net.createServer(function(socket) {
-	socket.write(JSON.stringify(activeMusicians) + '\r\n');
+var server = net.createServer();
+server.on('connection', function(conn){
+    conn.write(JSON.stringify(activeMusicians));
+    conn.end();
 });
-
 server.listen(PORT_TCP);
