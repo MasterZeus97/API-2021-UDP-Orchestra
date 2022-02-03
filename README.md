@@ -108,13 +108,13 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
 |          | _![image](images/diagram.png)._                              |
 | Question | Who is going to **send UDP datagrams** and **when**?         |
-|          | _Les musiciens (les containers faisant tourner musician.js) vont envoyer un message toute les secondes._ |
+|          | _Les musiciens (les containers faisant tourner musician.js) vont envoyer un message toutes les secondes._ |
 | Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-|          | _Les auditeurs (les containers faisant tourner auditor.js) vont écouter et réceptionner les datagrammes UDP. Lors de la réception d'un datagrams, on sauvegarde le musicien qui vien de jouer dans un tableau avec son id et son instrument. On sauvegarde aussi le moment ou on l'a entendu. Si le musicien existe déjà, on update seulement le moment où on l'a entendu._ |
+|          | _L'auditeur (le container faisant tourner auditor.js) va écouter et réceptionner les datagrammes UDP. Lors de la réception d'un datagramme, on sauvegarde le musicien qui vient de jouer dans un tableau avec son id et son instrument. On sauvegarde aussi le moment où on l'a entendu. Si le musicien existe déjà, on met à jour le temps de sa dernière activité._ |
 | Question | What **payload** should we put in the UDP datagrams?         |
 |          | _Le son de l'instrument du musicien, ainsi que l'id du musicien ayant joué cet instrument._ |
 | Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-|          | _Pour le sender (AKA le musicien), nous avons un objet JSON qui est envoyé au receiver (AKA l'auditeur) toute les secondes. Cet objet JSON n'aura jamais besoin d'être modifié une fois créé, puisqu'il contient des informations propre à chaque sender.<br />Pour ce qui est du receiver, nous avons ici un tableau d'objet JSON représentant les sender actif. Ce tableau est mis à jour quand un nouveau musicien commence à jouer, ou quand un musicien est silencieux depuis trop longtemps, auquel cas nous supprimons l'entrée correspondant à ce musicien dans le tableau. Le tableau nous est transmis lorsqu'on se connecte au receiver sur le port 1234 en tcp._ |
+|          | _Pour le sender (AKA le musicien), nous avons un objet JSON qui est envoyé au receiver (AKA l'auditeur) toute les secondes. Cet objet JSON n'aura jamais besoin d'être modifié une fois créé, puisqu'il contient des informations propre à chaque sender.<br />Pour ce qui est du receiver, nous avons ici un tableau d'objet JSON représentant les sender actif. Ce tableau est mis à jour quand un nouveau musicien commence à jouer, ou quand un musicien est silencieux depuis trop longtemps, auquel cas nous supprimons l'entrée correspondant à ce musicien dans le tableau. Le tableau nous est transmis lorsqu'on se connecte au receiver sur le port 2205 en tcp._ |
 
 ## Task 2: implement a "musician" Node.js application
 
@@ -129,7 +129,7 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | Question | How can we use the `https://www.npmjs.com/` web site?        |
 |          | _Ce site fonctionne un peu comme docker-hub, dans le sens où il sert de stockage de projet pouvant être utilisé par d'autre développeur. En effet, la commande npm va chercher les package sur ce site afin de les installer._ |
 | Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-|          | _Il existe un package, nommé uuid, permettant de générer des uuid et pouvant être installé grâce à la commande npm. Nous avons utilisé la version 1 dans notre projet, la version 4 est également souvent proposée lorsqu'on cherche comment utiliser ce package. De plus, il existe un autre package permettant de générer des uuidv4, le package crypto avec la méthode crypto.randomUUID()._ |
+|          | _Il existe un package, nommé uuid, permettant de générer des uuid et pouvant être installé grâce à la commande npm. Nous avons utilisé la version 4 dans notre projet. De plus, il existe un autre package permettant de générer des uuidv4, le package crypto avec la méthode crypto.randomUUID()._ |
 | Question | In Node.js, how can we execute a function on a **periodic** basis? |
 |          | _Grâce à la fonction setInterval(callback, delay). Le paramètre callback attend une fonction, qui sera appelée tous les "delay" time, delay étant un paramètre numérique correspondant au temps en milliseconde entre deux appels de la fonction callback._ |
 | Question | In Node.js, how can we **emit UDP datagrams**?               |
@@ -152,7 +152,7 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | Question | How do we **stop/kill** one running container?               |
 |          | _Il y a deux manière de stopper un container en train de fonctionner. La première permet de demander au processus principal du container de s'arrêter avec la commande `docker stop containerName`. La deuxième arrête le container sans vérifier quoi que ce soit, un peu comme si on débranchait la prise, avec la commande `docker kill containerName`_ |
 | Question | How can we check that our running containers are effectively sending UDP datagrams? |
-|          | _Grâce à wireshark où tcpdump._                              |
+|          | _Grâce à wireshark ou tcpdump._                              |
 
 ## Task 4: implement an "auditor" Node.js application
 
